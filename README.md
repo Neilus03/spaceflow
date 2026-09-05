@@ -1,0 +1,41 @@
+# SpaceFlow project website
+
+**[Visit the website](https://neilus03.github.io/spaceflow/)**
+
+Project page for **SpaceFlow: Locally Controllable 3D Generation**. This repository contains the static website, its research assets, and the static build/validation scripts.
+
+## Features
+
+- Author links, affiliations, the paper and supplementary material, and a video demonstration.
+- Caveat Bold branding with the paper's pink-to-orange gradient.
+- Six featured interactive input/result comparisons and the full searchable 3D gallery, including synchronized cameras and GLB downloads.
+- An animated paper teaser with all six input geometries and five matching outputs. Drag either model to rotate its pair. Annotation arrows follow the relevant input parts and hide when occluded.
+- Supplementary primitive-to-part routing figures, the method overview, and an interactive results chart.
+- Keyboard controls, reduced-motion support, pause/resume, and original-figure fallbacks.
+
+The lamp result currently remains its original paper image while its exact burgundy-and-marble GLB is being located; its input geometry and annotation arrows are interactive. Other examples use the matching saved research models. No inference service is required.
+
+## Local preview
+
+```sh
+python3 -m http.server 8765 --bind 127.0.0.1
+```
+
+Open <http://127.0.0.1:8765/>. Use an HTTP server so the browser can load the 3D assets.
+
+## Build and publish
+
+```sh
+python3 scripts/build.py
+python3 scripts/validate.py --dist
+```
+
+The build creates `dist/` from an explicit website allowlist. Validation checks local resources, anchors, gallery policy, model hashes, embedded glTF dependencies, and GitHub's per-file size limit. All fonts, models, and rendering libraries are hosted with the site; runtime asset paths work under the `/spaceflow/` subdirectory.
+
+GitHub Pages publishes the root of the `main` branch. Run the build and validation commands before pushing an update; a push to `main` updates the public website. The `.nojekyll` file keeps the site as plain static files.
+
+## Assets and attribution
+
+Research content, figures, video, and model outputs belong to their respective authors. No additional research-content license is granted by this repository. Font and renderer license notices are included with the corresponding assets. Three.js 0.180.0 is vendored locally under its MIT license. Model source provenance and SHA-256 hashes are recorded in `assets/teaser/provenance.json` and `assets/gallery-data.js`.
+
+The publication identifier, final citation metadata, and method-code link will be added when available.
