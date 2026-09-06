@@ -51,7 +51,7 @@
     }
   },
   "figureSource": "SpaceFlow_arXiv/figs/teaser_final_v2.pdf",
-  "platePreparation": "Remove eleven asset image draws and ten dashed annotation forms plus their separate arrowheads. Retain the lamp output image /X168, all labels and reference images, panel backgrounds, and input-to-output arrows.",
+  "platePreparation": "Remove eleven asset image draws and ten dashed annotation forms plus their separate arrowheads. Retain the lamp output image /X168, all labels and reference images, panel backgrounds, and input-to-output arrows. In the animated view, an opaque native SVG panel replaces the complete lamp panel with the cactus references and caption; cactus input and output are live GLBs. The original paper figure is available through the static toggle.",
   "viewer": "Original GLB bytes retained. Z-up to Y-up and centering for display; input sRGB swatches converted to linear RGB in memory. Shared camera angle within each pair. Annotation endpoints project actual input primitive centers; raycasting hides arrows behind occluding geometry.",
   "threeVersion": "0.180.0",
   "examples": {
@@ -87,9 +87,9 @@
       ],
       "status": "input and output verified"
     },
-    "lamp": {
-      "prompt": "table lamp",
-      "status": "input geometry verified; exact burgundy output with white marble base not yet located; original output image retained"
+    "cactus": {
+      "prompt": "a potted cactus",
+      "status": "Input and output matched to image-conditioned supplementary example cactus_green_copper_pot. Both assets rotate; tree reference controls the cactus and copper-cauldron reference controls primitive 0."
     }
   },
   "cactusReferences": {
