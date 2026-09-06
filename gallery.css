@@ -13,3 +13,9 @@ html[data-theme="dark"].embedded .load-state{color:#e0d3ed!important}
 html[data-theme="dark"].embedded .spinner{border-color:#574361!important;border-top-color:#d4aeea!important}
 html[data-theme="dark"].embedded .compatibility{background:#2d2538;color:#eddef6;border-color:#544360}
 html[data-theme="dark"].embedded .viewer-slot:focus-visible{outline-color:#d4aeea}
+
+/* Embedded comparisons must fit both panes inside the fixed-height iframe.
+   The standalone gallery can stack on phones; an embed cannot scroll to row two. */
+html.embedded .viewer-pair{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:minmax(0,1fr);height:100vh!important;min-height:0!important}
+html.embedded .viewer-slot{height:100%!important;min-height:0!important;min-width:0}
+html.embedded .viewer-input{border-bottom:0}
