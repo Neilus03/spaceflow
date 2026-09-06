@@ -1,12 +1,12 @@
 import * as THREE from '../vendor/three/three.module.js';
 import {GLTFLoader} from '../vendor/three/GLTFLoader.js';
 import {RoomEnvironment} from '../vendor/three/RoomEnvironment.js';
-import {FIGURE,EXAMPLES} from './layout.js';
+import {FIGURE,EXAMPLES} from './layout.js?v=20260906-4';
 
 export async function mountTeaser(figure) {
  const stage=figure.querySelector('.teaser-stage'), image=figure.querySelector('#teaser-image');
  const play=figure.querySelector('#teaser-play'), toggle=figure.querySelector('#teaser-static'), status=figure.querySelector('#teaser-status');
- const original=image.src, background=new URL('./figure-plate.webp',import.meta.url).href;
+ const original=image.src, originalAlt=image.alt, animatedAlt='Local control examples: chair, trophy, figurine, balloon, elephant, and image-conditioned cactus, with rotating input and output assets.', background=new URL('./figure-plate.webp',import.meta.url).href;
  const motion=matchMedia('(prefers-reduced-motion: reduce)'), pitch=.29;
  const pairs=EXAMPLES.map(example=>({...example,views:[],angle:example.angle}));
  const slots=[],views=[],leaders=[],fallbacks=[];
@@ -72,7 +72,7 @@ export async function mountTeaser(figure) {
   if(!paused&&!pointer)raf=requestAnimationFrame(render);
  }
  function fail(error){
-  failed=true;cancelAnimationFrame(raf);image.src=original;figure.classList.add('is-static');slots.forEach(s=>s.hidden=true);
+  failed=true;cancelAnimationFrame(raf);image.src=original;image.alt=originalAlt;figure.classList.add('is-static');slots.forEach(s=>s.hidden=true);
   play.disabled=true;toggle.disabled=true;status.textContent='Original figure · 3D unavailable';frameState.ready=false;console.error('Animated teaser:',error);
  }
  try {
@@ -88,6 +88,7 @@ export async function mountTeaser(figure) {
     patch.className='teaser-fallback';patch.style.cssText=`left:${x/FIGURE.width*100}%;top:${y/FIGURE.height*100}%;width:${w/FIGURE.width*100}%;height:${h/FIGURE.height*100}%`;
     snapshot.src=original;snapshot.alt=`${pair.label}, original paper figure`;
     snapshot.style.cssText=`width:${FIGURE.width/w*100}%;left:${-x/w*100}%;top:${-y/h*100}%`;
+    if(pair.id==='cactus'){snapshot.src=new URL('./cactus-poster.png',import.meta.url).href;snapshot.alt='Image-conditioned cactus input and SpaceFlow result';snapshot.style.cssText='width:100%;height:100%;left:0;top:0';}
     patch.append(snapshot);fallbacks.push(patch);return [];
    }
   }))).flat();
@@ -124,14 +125,18 @@ export async function mountTeaser(figure) {
    }
   }
   const plate=new Image();plate.src=background;await plate.decode();
-  stage.append(...fallbacks,renderer.domElement,svg,...slots);image.src=background;frameState.ready=true;
-  status.textContent=frameState.unavailable.length?'Drag to rotate · some examples shown as original figures':'Drag to rotate · lamp result shown as original image';play.disabled=false;toggle.disabled=false;setControls();
+  // Native figure panel: replace the unavailable lamp with the supplied cactus example.
+  const replacement=document.createElement('div');replacement.className='teaser-replacement';
+  replacement.style.cssText=`left:${7984/FIGURE.width*100}%;top:${3815/FIGURE.height*100}%;width:${3558/FIGURE.width*100}%;height:${2378/FIGURE.height*100}%`;
+  replacement.innerHTML=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 3558 2378" width="100%" height="100%" aria-hidden="true"><rect width="3558" height="2378" rx="25" fill="#f4f9f9"/><image href="${new URL('./cactus-tree.png',import.meta.url).href}" x="1600" y="50" width="470" height="520" preserveAspectRatio="xMidYMid meet"/><image href="${new URL('./cactus-pot.jpg',import.meta.url).href}" x="30" y="1070" width="430" height="590" preserveAspectRatio="xMidYMid meet"/><path d="M1770 1300 H2200 m-70 -35 70 35 -70 35" fill="none" stroke="#34383b" stroke-width="15"/><text x="1779" y="2210" text-anchor="middle" font-family="Arial,sans-serif" font-size="225" fill="#141719">“a potted cactus”</text></svg>`;
+  stage.append(replacement,...fallbacks,renderer.domElement,svg,...slots);image.src=background;image.alt=animatedAlt;frameState.ready=true;
+  status.textContent=frameState.unavailable.length?'Drag to rotate · some examples shown as original figures':'Drag either asset to rotate its input/output pair';play.disabled=false;toggle.disabled=false;setControls();
   renderer.domElement.addEventListener('webglcontextlost',event=>{event.preventDefault();fail(new Error('WebGL context lost'));});
   const visibility=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;frameState.visible=visible;last=0;if(visible)requestRender();else{cancelAnimationFrame(raf);raf=0;}},{threshold:.05});visibility.observe(stage);
   new ResizeObserver(requestRender).observe(stage);
   document.addEventListener('visibilitychange',()=>{last=0;if(document.hidden){cancelAnimationFrame(raf);raf=0;}else requestRender();});
   play.addEventListener('click',()=>{paused=!paused;setControls();last=0;requestRender();});
-  toggle.addEventListener('click',()=>{staticView=!staticView;figure.classList.toggle('is-static',staticView);image.src=staticView?original:background;setControls();last=0;requestRender();});
+  toggle.addEventListener('click',()=>{staticView=!staticView;figure.classList.toggle('is-static',staticView);image.src=staticView?original:background;image.alt=staticView?originalAlt:animatedAlt;setControls();last=0;requestRender();});
   motion.addEventListener('change',event=>{if(event.matches){paused=true;setControls();requestRender();}});
   for(const view of views){const {slot,pair}=view;
    slot.addEventListener('pointerdown',event=>{if(event.pointerType==='mouse'&&event.button!==0)return;pointer={id:event.pointerId,x:event.clientX,angle:pair.angle,pair};slot.setPointerCapture(event.pointerId);});

@@ -65,7 +65,7 @@ assert (BASE/'assets/teaser/figure-plate.webp').is_file()
 # Include vendored ES-module imports in static release validation.
 for module in [BASE/'assets/teaser/viewer.js',*(BASE/'assets/vendor/three').glob('*.js')]:
  for relative in re.findall(r"from\s*['\"](\.[^'\"]+)['\"]",module.read_text()):
-  assert (module.parent/relative).is_file(),f'missing module {relative} in {module.name}'
+  assert (module.parent/urlsplit(relative).path).is_file(),f'missing module {relative} in {module.name}'
 for f in BASE.rglob('*'):
  if f.is_file() and '.git' not in f.parts and f.stat().st_size>=100*1024*1024:raise AssertionError(f'100 MiB file: {f}')
 assert 'shape:\'\'' not in (BASE/'site.js').read_text()

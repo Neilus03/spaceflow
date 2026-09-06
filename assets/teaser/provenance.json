@@ -41,9 +41,13 @@
       "source": "/work/courses/3dv/team3/spaceflow-minimal/spaceflow_runtime/sq_ui_runs/20260611T004619Z_Ironman/output/out_sim.glb",
       "sha256": "2c429e1d39c191bc5844f58cfca3e68911cc4fb61a495cf12ebe00317bed5519"
     },
-    "lamp-input.glb": {
-      "source": "/work/courses/3dv/team3/spaceflow-minimal/spaceflow_runtime/sq_ui_runs/20260621T165204Z_table_lamp/output/input_superquadrics_colored.glb",
-      "sha256": "5322308f05e84f2d711ce34f88b5dcddee702b46795bbb82308d2174881efc06"
+    "cactus-input.glb": {
+      "source": "/work/courses/3dv/team3/correct_inputs_eval83/potted_cactus/output/01_local_tau3_tau10_polyak0p18/input_superquadrics_colored.glb",
+      "sha256": "fdb571884e64bdc34bd5325439f393256a7cf5441f9e99998a485b8166b0e1be"
+    },
+    "cactus-output.glb": {
+      "source": "/work/courses/3dv/team3/image_conditioning_showcase/runs/cactus_green_copper_pot/out_sim.glb",
+      "sha256": "aaefa48e9eb1349ca381d63d6a5b317b1d7b6e2f8010e1e9e3d708cf28ee47dc"
     }
   },
   "figureSource": "SpaceFlow_arXiv/figs/teaser_final_v2.pdf",
@@ -87,5 +91,12 @@
       "prompt": "table lamp",
       "status": "input geometry verified; exact burgundy output with white marble base not yet located; original output image retained"
     }
+  },
+  "cactusReferences": {
+    "global": "tree.png",
+    "local": {
+      "0": "copper_cauldron.jpg"
+    },
+    "source": "/work/courses/3dv/team3/image_conditioning_showcase/runs/cactus_green_copper_pot/meta.json"
   }
 }

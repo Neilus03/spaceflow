@@ -18,8 +18,8 @@ export const EXAMPLES = [
   {id:'elephant-head',start:[5810,4140],parts:[7]},
   {id:'elephant-legs',start:[4490,5440],parts:[0,1,2,3]}
  ]},
- {id:'lamp',roles:['input'],panel:[7984, 3815, 3558, 2378],label:'Burgundy table lamp with marble base',angle:-.65,slots:[[8400,3805,1310,2150],[10200,3810,1350,2150]],annotations:[
-  {id:'lamp-shade',start:[9730,4020],parts:[0,1,2,3]},
-  {id:'lamp-base',start:[8340,5160],parts:[4]}
+ {id:'cactus',panel:[7984,3815,3558,2378],label:'Potted cactus with image-conditioned green surface and copper pot',angle:-.65,slots:[[8420,4210,1170,1540],[10200,4140,1250,1650]],annotations:[
+  {id:'cactus-green',start:[9610,4150],parts:[1,2,3]},
+  {id:'cactus-pot',start:[8440,5150],parts:[0]}
  ]}
 ];

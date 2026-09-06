@@ -8,12 +8,12 @@ Project page for **SpaceFlow: Locally Controllable 3D Generation**. This reposit
 
 - Author links, affiliations, the paper and supplementary material, and a video demonstration.
 - Caveat Bold branding with the paper's pink-to-orange gradient.
-- Six featured interactive input/result comparisons and the full searchable 3D gallery, including synchronized cameras and GLB downloads.
-- An animated paper teaser with all six input geometries and five matching outputs. Drag either model to rotate its pair. Annotation arrows follow the relevant input parts and hide when occluded.
+- Six featured interactive input/result comparisons with prominent shape prompts, geometric-control legends, and part-tracked local appearance labels; a full searchable 3D gallery with synchronized cameras and GLB downloads.
+- An animated paper teaser with all six input geometries and six matching outputs. Drag either model to rotate its pair. Annotation arrows follow the relevant input parts and hide when occluded.
 - Supplementary primitive-to-part routing figures, the method overview, and an interactive results chart.
 - Keyboard controls, reduced-motion support, pause/resume, and original-figure fallbacks.
 
-The lamp result currently remains its original paper image while its exact burgundy-and-marble GLB is being located; its input geometry and annotation arrows are interactive. Other examples use the matching saved research models. No inference service is required.
+All six teaser examples have matching 3D input/output pairs. The image-conditioned cactus from the supplementary material replaces the lamp in the animated version; the original paper figure remains available with the figure toggle. No inference service is required.
 
 ## Local preview
 

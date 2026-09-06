@@ -19,3 +19,14 @@ html[data-theme="dark"].embedded .viewer-slot:focus-visible{outline-color:#d4aee
 html.embedded .viewer-pair{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:minmax(0,1fr);height:100vh!important;min-height:0!important}
 html.embedded .viewer-slot{height:100%!important;min-height:0!important;min-width:0}
 html.embedded .viewer-input{border-bottom:0}
+
+/* A mid-tone studio background distinguishes low-control white primitives. */
+html[data-theme="light"] .viewer-input,html[data-theme="light"] .viewer-output{background:radial-gradient(ellipse at center,#c1cad6 0%,#a6b3c5 100%)}
+html[data-theme="light"].embedded .viewer-input,html[data-theme="light"].embedded .viewer-output{background:radial-gradient(ellipse at center,#c1cad6 0%,#a6b3c5 100%)!important}
+.featured-leaders{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:5;color:#3c2f51;overflow:hidden}.featured-leaders>path{fill:none;stroke:currentColor;stroke-width:1.5;stroke-dasharray:2 4;stroke-linecap:round}
+.featured-cue{position:absolute;left:18px;top:61px;z-index:6;max-width:calc(100% - 36px);padding:9px 13px;background:#fffef7ed;color:#292235;border:1px solid #7d6a94;border-radius:10px;box-shadow:0 3px 12px #33284215;pointer-events:none;display:flex;flex-direction:column;gap:3px;text-align:left}.featured-cue .cue-part{font-size:10px;letter-spacing:.04em;color:#655374}.featured-cue strong{font-size:15px;font-weight:650;line-height:1.35}.featured-cue .cue-control{font-size:9px;color:#655374;display:flex;align-items:center;gap:5px}.cue-control:before{content:'';width:7px;height:7px;background:#fff;border:1px solid #6e6880;border-radius:2px}.featured-cue[data-control="high"] .cue-control:before{background:#f4c447;border-color:#a78013}.featured-cue.cue-secondary{top:auto;bottom:57px;left:auto;right:18px}.featured-overall{position:absolute;top:61px;left:22px;right:16px;color:#343045;font-size:11px;line-height:1.4;pointer-events:none;z-index:4}
+html[data-theme="dark"] .featured-leaders{color:#f0d9ff}html[data-theme="dark"] .featured-cue{background:#30283aee;color:#faf3ff;border-color:#a58db8}html[data-theme="dark"] .featured-cue .cue-part,html[data-theme="dark"] .featured-cue .cue-control,html[data-theme="dark"] .featured-overall{color:#e2d3ed}
+@media(max-width:650px){.featured-cue{left:9px;top:49px;padding:7px 9px;max-width:calc(100% - 18px)}.featured-cue strong{font-size:11px}.featured-cue .cue-part,.featured-cue .cue-control{font-size:8px}.featured-cue.cue-secondary{right:9px;bottom:52px}.featured-overall{top:50px;left:10px;right:10px;font-size:9px}}
+/* The renderer is a fixed canvas at z=30; leaders must remain above it. */
+.featured-leaders{z-index:41}.featured-cue{z-index:42}.featured-overall{z-index:41}
+html.embedded .viewer-slot{isolation:auto}

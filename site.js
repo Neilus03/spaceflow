@@ -1,48 +1,26 @@
 'use strict';
-const scenes = {
-  "scene-009": {
-    "title": "retro robot toy",
-    "shape": "a retro tin robot toy",
-    "cue": "Face screen → “Robot cyan glass face”"
-  },
-  "scene-012": {
-    "title": "rocket",
-    "shape": "a toy rocket",
-    "cue": "Nose cone → “Red metal rocket”; Left fin → “Red metal rocket”; Right fin → “Red metal rocket”"
-  },
-  "scene-011": {
-    "title": "airplane",
-    "shape": "a small vintage propeller airplane with tapered wings",
-    "cue": "Left main wing → “Red plane”; Right main wing → “Red plane”"
-  },
-  "scene-017": {
-    "title": "wooden snow sled",
-    "shape": "a traditional wooden snow sled with two runners, a raised back, and a pull rope",
-    "cue": "Left runner → “Dark steel sled”; Right runner → “Dark steel sled”"
-  },
-  "scene-033": {
-    "title": "satellite",
-    "shape": "a small satellite with solar panels and a dish antenna",
-    "cue": "Left solar panel → “Dark blue satellite”; Right solar panel → “Dark blue satellite”; Dish antenna → “Silver satellite”"
-  },
-  "scene-035": {
-    "title": "skateboard",
-    "shape": "a simple skateboard with a wooden deck and two pairs of wheels",
-    "cue": "Front axle and wheel pair → “Black rubber skateboard”; Rear axle and wheel pair → “Black rubber skateboard”"
-  }
-};
-// Remaining labels below are populated from the exact source-gallery metadata.
+const scenes = window.__FEATURED_SCENES__;
 const viewer = document.getElementById('hero-viewer');
-document.querySelectorAll('[data-scene]').forEach(button => button.addEventListener('click', () => {
-  if (button.getAttribute('aria-pressed') === 'true') return;
-  const id = button.dataset.scene, scene = scenes[id];
-  document.querySelectorAll('[data-scene]').forEach(item => {const active = item === button;item.classList.toggle('active', active);item.setAttribute('aria-pressed',String(active));});
-  viewer.src = 'gallery.html?v=20260906-3&embed=1&scene=' + encodeURIComponent(id);
-  viewer.title = 'Synchronized 3D comparison: ' + scene.title + ' input and generated result';
-  document.getElementById('shape-prompt').textContent = '“' + scene.shape + '”';
-  document.getElementById('local-prompt').textContent = scene.cue;
-  document.getElementById('scene-announcement').textContent = 'Selected ' + scene.title + '. Drag either view to compare the saved input and result.';
+let selectedScene='scene-009';
+function showSceneLabels(id) {
+ const scene=scenes[id];if(!scene)return;
+ document.querySelectorAll('[data-scene]').forEach(item=>{const active=item.dataset.scene===id;item.classList.toggle('active',active);item.setAttribute('aria-pressed',String(active));});
+ document.getElementById('shape-prompt').textContent='“'+scene.shape+'”';
+ viewer.title='Synchronized 3D comparison: '+scene.title+' input and generated result';
+}
+document.querySelectorAll('[data-scene]').forEach(button=>button.addEventListener('click',()=>{
+ const id=button.dataset.scene;if(id===selectedScene)return;selectedScene=id;
+ showSceneLabels(id);viewer.style.visibility='hidden';document.getElementById('featured-loading').hidden=false;
+ // Replace iframe history: Back/Forward must not restore a model without its labels.
+ viewer.contentWindow.location.replace('gallery.html?v=20260906-4&embed=1&scene='+encodeURIComponent(id));
 }));
+window.addEventListener('message',event=>{
+ if(event.origin!==location.origin||event.source!==viewer.contentWindow||event.data?.type!=='spaceflow-featured-ready')return;
+ const id=event.data.scene;if(!scenes[id]||viewer.contentWindow.__GALLERY_PAYLOAD__?.cards[0]?.id!==id)return;
+ // The rendered card is the source of truth, including browser history restoration.
+ selectedScene=id;showSceneLabels(id);viewer.style.visibility='';document.getElementById('featured-loading').hidden=true;
+ document.getElementById('scene-announcement').textContent='Showing '+scenes[id].title+'. Local appearance labels follow the input parts.';
+});
 document.getElementById('reset-view').addEventListener('click', () => {
   try {viewer.contentDocument.getElementById('resetButton').click();} catch {document.getElementById('scene-announcement').textContent='The viewer is still loading. Please try again in a moment.';}
 });
@@ -87,7 +65,7 @@ if (animatedTeaser) {
  const teaserObserver = new IntersectionObserver(entries => {
   if (!entries[0].isIntersecting) return;
   teaserObserver.disconnect();
-  import('./assets/teaser/viewer.js').then(module => module.mountTeaser(animatedTeaser)).catch(error => {
+  import('./assets/teaser/viewer.js?v=20260906-4').then(module => module.mountTeaser(animatedTeaser)).catch(error => {
    document.getElementById('teaser-status').textContent = 'Original figure · 3D unavailable';
    console.error('Unable to initialize the elephant teaser:', error);
   });
@@ -115,3 +93,11 @@ viewer.addEventListener('load', () => {
 });
 heroRotate.addEventListener('click', () => viewer.contentDocument?.getElementById('autoRotateButton')?.click());
 syncRotationControl();
+
+function reconcileFeaturedScene() {
+ const id=viewer.contentWindow?.__GALLERY_PAYLOAD__?.cards[0]?.id;
+ if(!scenes[id])return;
+ selectedScene=id;showSceneLabels(id);viewer.style.visibility='';document.getElementById('featured-loading').hidden=true;
+}
+viewer.addEventListener('load',reconcileFeaturedScene);
+window.addEventListener('pageshow',reconcileFeaturedScene);
