@@ -2,3 +2,14 @@
 @font-face{font-family:Caveat;src:url('assets/fonts/Caveat-Bold.ttf') format('truetype');font-weight:700;font-display:swap}.spaceflow-word{font-family:Caveat,cursive!important;font-weight:700!important;font-style:normal!important;background:linear-gradient(90deg,#ff66c4,#ffc259)!important;background-clip:text!important;-webkit-background-clip:text!important;color:transparent!important;-webkit-text-fill-color:transparent!important;letter-spacing:-.045em!important;font-size:44px!important}.embedded .viewer-input{background:radial-gradient(ellipse at center,#fff 0%,#f3f1f6 100%)!important;border-right-color:#e5dfe9!important}.embedded .viewer-output{background:radial-gradient(ellipse at center,#fff 0%,#f2edf5 100%)!important}.embedded .pane-label{color:#5d476d!important;border-color:#e5dce9!important}.embedded .spinner{border-top-color:#60417c!important}
 
 .spaceflow-word{padding-right:.34em!important;padding-left:.12em!important;line-height:1.25!important;overflow:visible!important}
+
+html[data-theme="dark"]{color-scheme:dark}
+html[data-theme="dark"].embedded body{background:#211c2a!important}
+html[data-theme="dark"].embedded .viewer-input{background:radial-gradient(ellipse at center,#332c3e 0%,#221d2b 100%)!important;border-right-color:#45384f!important}
+html[data-theme="dark"].embedded .viewer-output{background:radial-gradient(ellipse at center,#382d43 0%,#241d2e 100%)!important}
+html[data-theme="dark"].embedded .pane-label{background:#2d2538!important;color:#eddef6!important;border-color:#544360!important}
+html[data-theme="dark"].embedded .orbit-hint{background:#2d2538!important;color:#d2c6dc!important}
+html[data-theme="dark"].embedded .load-state{color:#e0d3ed!important}
+html[data-theme="dark"].embedded .spinner{border-color:#574361!important;border-top-color:#d4aeea!important}
+html[data-theme="dark"].embedded .compatibility{background:#2d2538;color:#eddef6;border-color:#544360}
+html[data-theme="dark"].embedded .viewer-slot:focus-visible{outline-color:#d4aeea}

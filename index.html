@@ -14,6 +14,7 @@
   <title>SpaceFlow · Locally Controllable 3D Generation</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/fonts/Caveat-Bold.ttf" as="font" type="font/ttf" crossorigin>
+  <script src="assets/theme.js"></script>
   <link rel="stylesheet" href="style.css">
   <script src="site.js" defer></script>
 </head>
@@ -22,6 +23,7 @@
 <header class="nav">
   <a class="brand wordmark" href="#" aria-label="SpaceFlow home">SpaceFlow</a>
   <nav aria-label="Main navigation"><a href="#explore">Explore</a><a href="#method">Method</a><a href="#results">Results</a><a href="assets/SpaceFlow-paper.pdf" target="_blank" rel="noopener">Paper <span aria-hidden="true">↗</span></a></nav>
+  <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 13A9 9 0 0 1 11 3.2 9 9 0 1 0 20.8 13Z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><span class="theme-label">Dark mode</span></button>
 </header>
 <main id="content">
   <section class="hero" aria-labelledby="project-title">
