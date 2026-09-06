@@ -1,11 +1,35 @@
 'use strict';
 const scenes = {
-  'scene-006': {title:'slat-back chair',shape:'classic chair with a slat back',cue:'Seat → “Red leather chair”'},
-  'scene-015': {title:'toy elephant',shape:'toy elephant',cue:'Ear → “Pink painted wood ear”'},
-  'scene-010': {title:'sailboat',shape:'Sailboat',cue:'Sail → “Yellow sail”'},
-  'scene-026': {title:'gramophone',shape:'an antique gramophone with a large brass horn',cue:'Horn → “Brass gramophone”'},
-  'scene-012': {"title": "toy rocket", "shape": "a toy rocket", "cue": "Nose cone → “Red metal rocket”"},
-  'scene-036': {"title": "telescope", "shape": "an astronomical telescope on a tripod mount", "cue": "Left tripod leg → “Light wood telescope”"}
+  "scene-009": {
+    "title": "retro robot toy",
+    "shape": "a retro tin robot toy",
+    "cue": "Face screen → “Robot cyan glass face”"
+  },
+  "scene-012": {
+    "title": "rocket",
+    "shape": "a toy rocket",
+    "cue": "Nose cone → “Red metal rocket”; Left fin → “Red metal rocket”; Right fin → “Red metal rocket”"
+  },
+  "scene-011": {
+    "title": "airplane",
+    "shape": "a small vintage propeller airplane with tapered wings",
+    "cue": "Left main wing → “Red plane”; Right main wing → “Red plane”"
+  },
+  "scene-017": {
+    "title": "wooden snow sled",
+    "shape": "a traditional wooden snow sled with two runners, a raised back, and a pull rope",
+    "cue": "Left runner → “Dark steel sled”; Right runner → “Dark steel sled”"
+  },
+  "scene-033": {
+    "title": "satellite",
+    "shape": "a small satellite with solar panels and a dish antenna",
+    "cue": "Left solar panel → “Dark blue satellite”; Right solar panel → “Dark blue satellite”; Dish antenna → “Silver satellite”"
+  },
+  "scene-035": {
+    "title": "skateboard",
+    "shape": "a simple skateboard with a wooden deck and two pairs of wheels",
+    "cue": "Front axle and wheel pair → “Black rubber skateboard”; Rear axle and wheel pair → “Black rubber skateboard”"
+  }
 };
 // Remaining labels below are populated from the exact source-gallery metadata.
 const viewer = document.getElementById('hero-viewer');
@@ -13,7 +37,7 @@ document.querySelectorAll('[data-scene]').forEach(button => button.addEventListe
   if (button.getAttribute('aria-pressed') === 'true') return;
   const id = button.dataset.scene, scene = scenes[id];
   document.querySelectorAll('[data-scene]').forEach(item => {const active = item === button;item.classList.toggle('active', active);item.setAttribute('aria-pressed',String(active));});
-  viewer.src = 'gallery.html?v=20260906-2&embed=1&scene=' + encodeURIComponent(id);
+  viewer.src = 'gallery.html?v=20260906-3&embed=1&scene=' + encodeURIComponent(id);
   viewer.title = 'Synchronized 3D comparison: ' + scene.title + ' input and generated result';
   document.getElementById('shape-prompt').textContent = '“' + scene.shape + '”';
   document.getElementById('local-prompt').textContent = scene.cue;
@@ -70,3 +94,24 @@ if (animatedTeaser) {
  }, {rootMargin:'200px'});
  teaserObserver.observe(animatedTeaser);
 }
+
+// Mirror the gallery's rotation control without restarting its models.
+const heroRotate = document.getElementById('hero-rotate');
+let rotationObserver;
+function syncRotationControl() {
+ const control = viewer.contentDocument?.getElementById('autoRotateButton');
+ if (!control) return;
+ const rotating = control.getAttribute('aria-pressed') === 'true';
+ heroRotate.setAttribute('aria-pressed', String(rotating));
+ heroRotate.textContent = rotating ? 'Pause rotation' : 'Resume rotation';
+}
+viewer.addEventListener('load', () => {
+ rotationObserver?.disconnect();
+ const control = viewer.contentDocument?.getElementById('autoRotateButton');
+ if (!control) return;
+ rotationObserver = new MutationObserver(syncRotationControl);
+ rotationObserver.observe(control, {attributes:true, attributeFilter:['aria-pressed']});
+ syncRotationControl();
+});
+heroRotate.addEventListener('click', () => viewer.contentDocument?.getElementById('autoRotateButton')?.click());
+syncRotationControl();
