@@ -13,7 +13,7 @@ document.querySelectorAll('[data-scene]').forEach(button => button.addEventListe
   if (button.getAttribute('aria-pressed') === 'true') return;
   const id = button.dataset.scene, scene = scenes[id];
   document.querySelectorAll('[data-scene]').forEach(item => {const active = item === button;item.classList.toggle('active', active);item.setAttribute('aria-pressed',String(active));});
-  viewer.src = 'gallery.html?embed=1&scene=' + encodeURIComponent(id);
+  viewer.src = 'gallery.html?v=20260906-2&embed=1&scene=' + encodeURIComponent(id);
   viewer.title = 'Synchronized 3D comparison: ' + scene.title + ' input and generated result';
   document.getElementById('shape-prompt').textContent = '“' + scene.shape + '”';
   document.getElementById('local-prompt').textContent = scene.cue;
