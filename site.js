@@ -1,28 +1,12 @@
 'use strict';
-const scenes = window.__FEATURED_SCENES__;
-const viewer = document.getElementById('hero-viewer');
-let selectedScene='scene-009';
-function showSceneLabels(id) {
- const scene=scenes[id];if(!scene)return;
- document.querySelectorAll('[data-scene]').forEach(item=>{const active=item.dataset.scene===id;item.classList.toggle('active',active);item.setAttribute('aria-pressed',String(active));});
- document.getElementById('shape-prompt').textContent='“'+scene.shape+'”';
- viewer.title='Synchronized 3D comparison: '+scene.title+' input and generated result';
-}
-document.querySelectorAll('[data-scene]').forEach(button=>button.addEventListener('click',()=>{
- const id=button.dataset.scene;if(id===selectedScene)return;selectedScene=id;
- showSceneLabels(id);viewer.style.visibility='hidden';document.getElementById('featured-loading').hidden=false;
- // Replace iframe history: Back/Forward must not restore a model without its labels.
- viewer.contentWindow.location.replace('gallery.html?v=20260906-4&embed=1&scene='+encodeURIComponent(id));
-}));
+const viewer=document.getElementById('hero-viewer');
+document.getElementById('reset-view').addEventListener('click',()=>viewer.contentDocument?.getElementById('resetButton')?.click());
+for(const [id,delta] of [['carousel-prev',-1],['carousel-next',1]])document.getElementById(id).addEventListener('click',()=>viewer.contentWindow?.postMessage({type:'spaceflow-carousel-step',delta},location.origin));
+document.getElementById('example-search').addEventListener('input',event=>viewer.contentWindow?.postMessage({type:'spaceflow-carousel-search',query:event.target.value},location.origin));
 window.addEventListener('message',event=>{
- if(event.origin!==location.origin||event.source!==viewer.contentWindow||event.data?.type!=='spaceflow-featured-ready')return;
- const id=event.data.scene;if(!scenes[id]||viewer.contentWindow.__GALLERY_PAYLOAD__?.cards[0]?.id!==id)return;
- // The rendered card is the source of truth, including browser history restoration.
- selectedScene=id;showSceneLabels(id);viewer.style.visibility='';document.getElementById('featured-loading').hidden=true;
- document.getElementById('scene-announcement').textContent='Showing '+scenes[id].title+'. Local appearance labels follow the input parts.';
-});
-document.getElementById('reset-view').addEventListener('click', () => {
-  try {viewer.contentDocument.getElementById('resetButton').click();} catch {document.getElementById('scene-announcement').textContent='The viewer is still loading. Please try again in a moment.';}
+ if(event.origin!==location.origin||event.source!==viewer.contentWindow||event.data?.type!=='spaceflow-carousel')return;
+ const {index,total}=event.data;document.getElementById('carousel-position').textContent=total?`${index} / ${total}`:'No matches';
+ document.getElementById('carousel-prev').disabled=index<=1;document.getElementById('carousel-next').disabled=index>=total;
 });
 const steps = [
  ['THE INPUT','The input consists of editable geometric parts, each with a local control level and an optional text or image appearance cue. Deformable superquadrics provide a compact representation for specifying these parts.'],
@@ -50,7 +34,7 @@ document.getElementById('copy-citation').addEventListener('click', async () => {
 });
 // Pausing after scrolling away saves work without starting media unexpectedly.
 const video=document.getElementById('demo-video');
-new IntersectionObserver(entries=>{if(!entries[0].isIntersecting)video.pause();},{threshold:0}).observe(video);
+new IntersectionObserver(entries=>{if(!entries[0].isIntersecting)video.pause();else if(!matchMedia('(prefers-reduced-motion: reduce)').matches)video.play().catch(()=>{});},{threshold:.15}).observe(video);
 document.addEventListener('visibilitychange',()=>{if(document.hidden)video.pause();});
 
 let viewerVisible = true;
@@ -65,7 +49,7 @@ if (animatedTeaser) {
  const teaserObserver = new IntersectionObserver(entries => {
   if (!entries[0].isIntersecting) return;
   teaserObserver.disconnect();
-  import('./assets/teaser/viewer.js?v=20260906-4').then(module => module.mountTeaser(animatedTeaser)).catch(error => {
+  import('./assets/teaser/viewer.js?v=20260908-1').then(module => module.mountTeaser(animatedTeaser)).catch(error => {
    document.getElementById('teaser-status').textContent = 'Original figure · 3D unavailable';
    console.error('Unable to initialize the elephant teaser:', error);
   });
@@ -93,11 +77,3 @@ viewer.addEventListener('load', () => {
 });
 heroRotate.addEventListener('click', () => viewer.contentDocument?.getElementById('autoRotateButton')?.click());
 syncRotationControl();
-
-function reconcileFeaturedScene() {
- const id=viewer.contentWindow?.__GALLERY_PAYLOAD__?.cards[0]?.id;
- if(!scenes[id])return;
- selectedScene=id;showSceneLabels(id);viewer.style.visibility='';document.getElementById('featured-loading').hidden=true;
-}
-viewer.addEventListener('load',reconcileFeaturedScene);
-window.addEventListener('pageshow',reconcileFeaturedScene);

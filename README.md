@@ -6,12 +6,12 @@ Project page for **SpaceFlow: Locally Controllable 3D Generation**. This reposit
 
 ## Features
 
-- Author links, affiliations, the paper and supplementary material, and a video demonstration.
+- Author links and official CVG, Gradient Spaces, ETH Zürich, and Stanford logos; a 35-second teaser with a TL;DR, a visible abstract, and an overview before the examples.
 - Caveat Bold branding with the paper's pink-to-orange gradient.
-- Six featured interactive input/result comparisons with prominent shape prompts, geometric-control legends, and part-tracked local appearance labels; a full searchable 3D gallery with synchronized cameras and GLB downloads.
+- All 36 interactive input/result comparisons in a searchable, horizontally scrolling main-page carousel, with synchronized cameras and GLB downloads. The first six examples include part-tracked local appearance labels. Models rotate slowly by default, yield to dragging, and respect reduced-motion preferences. The standalone gallery remains available.
 - An animated paper teaser with all six input geometries and six matching outputs. Drag either model to rotate its pair. Annotation arrows follow the relevant input parts and hide when occluded.
 - Supplementary primitive-to-part routing figures, the method overview, and an interactive results chart.
-- Keyboard controls, reduced-motion support, pause/resume, and original-figure fallbacks.
+- Light theme by default, a persistent light/dark toggle, keyboard controls, reduced-motion support, pause/resume, and original-figure fallbacks.
 
 All six teaser examples have matching 3D input/output pairs. The image-conditioned cactus from the supplementary material replaces the lamp in the animated version; the original paper figure remains available with the figure toggle. No inference service is required.
 
@@ -37,5 +37,7 @@ GitHub Pages publishes the root of the `main` branch. Run the build and validati
 ## Assets and attribution
 
 Research content, figures, video, and model outputs belong to their respective authors. No additional research-content license is granted by this repository. Font and renderer license notices are included with the corresponding assets. Three.js 0.180.0 is vendored locally under its MIT license. Model source provenance and SHA-256 hashes are recorded in `assets/teaser/provenance.json` and `assets/gallery-data.js`.
+
+Official logo source URLs are recorded in `assets/logos/sources.json`.
 
 The publication identifier, final citation metadata, and method-code link will be added when available.

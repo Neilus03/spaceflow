@@ -7,7 +7,7 @@
   try { preference = localStorage.getItem(key); } catch {}
   const valid = value => value === 'dark' || value === 'light';
   if (!valid(preference)) preference = null;
-  const preferred = () => preference || (system.matches ? 'dark' : 'light');
+  const preferred = () => preference || 'light';
   function render() {
     const dark = root.dataset.theme === 'dark';
     const button = document.getElementById('theme-toggle');
