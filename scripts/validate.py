@@ -41,7 +41,7 @@ for name,p in parsers.items():
   count+=1
 for file in ['style.css','gallery.css']:
  for url in re.findall(r'url\([\'\"]?([^\)\'\"]+)',(BASE/file).read_text()):
-  if not url.startswith(('data:','http')):assert (BASE/url).is_file(),f'missing CSS asset: {url}'
+  if not url.startswith(('data:','http','#')):assert (BASE/url).is_file(),f'missing CSS asset: {url}'
 p=json.loads((BASE/'assets/gallery-data.js').read_text().split('=',1)[1].rstrip(';'))
 assert len(p['cards'])==36 and len(p['assets'])==72
 for key,a in p['assets'].items():
