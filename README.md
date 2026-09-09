@@ -6,9 +6,9 @@ Project page for **SpaceFlow: Locally Controllable 3D Generation**. This reposit
 
 ## Features
 
-- Author links and official CVG, Gradient Spaces, ETH Zürich, and Stanford logos; a 35-second teaser with a TL;DR, a visible abstract, and an overview before the examples.
+- Author links and official CVG, Gradient Spaces, ETH Zürich, and Stanford logos; the latest supplied 4K teaser with a TL;DR, a visible abstract, and an overview before the examples.
 - Caveat Bold branding with the paper's pink-to-orange gradient.
-- All 36 interactive input/result comparisons in a searchable, horizontally scrolling main-page carousel, with synchronized cameras and GLB downloads. The first six examples include part-tracked local appearance labels. Models rotate slowly by default, yield to dragging, and respect reduced-motion preferences. The standalone gallery remains available.
+- All 36 interactive input/result comparisons in a horizontally scrolling main-page carousel, with synchronized cameras and GLB downloads. The first six examples include part-tracked local appearance labels. Models rotate slowly by default, yield to dragging, and respect reduced-motion preferences. The standalone gallery remains available.
 - An animated paper teaser with all six input geometries and six matching outputs. Drag either model to rotate its pair. Annotation arrows follow the relevant input parts and hide when occluded.
 - Supplementary primitive-to-part routing figures, the method overview, and an interactive results chart.
 - Light theme by default, a persistent light/dark toggle, keyboard controls, reduced-motion support, pause/resume, and original-figure fallbacks.

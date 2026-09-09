@@ -2,7 +2,6 @@
 const viewer=document.getElementById('hero-viewer');
 document.getElementById('reset-view').addEventListener('click',()=>viewer.contentDocument?.getElementById('resetButton')?.click());
 for(const [id,delta] of [['carousel-prev',-1],['carousel-next',1]])document.getElementById(id).addEventListener('click',()=>viewer.contentWindow?.postMessage({type:'spaceflow-carousel-step',delta},location.origin));
-document.getElementById('example-search').addEventListener('input',event=>viewer.contentWindow?.postMessage({type:'spaceflow-carousel-search',query:event.target.value},location.origin));
 window.addEventListener('message',event=>{
  if(event.origin!==location.origin||event.source!==viewer.contentWindow||event.data?.type!=='spaceflow-carousel')return;
  const {index,total}=event.data;document.getElementById('carousel-position').textContent=total?`${index} / ${total}`:'No matches';
@@ -49,7 +48,7 @@ if (animatedTeaser) {
  const teaserObserver = new IntersectionObserver(entries => {
   if (!entries[0].isIntersecting) return;
   teaserObserver.disconnect();
-  import('./assets/teaser/viewer.js?v=20260908-1').then(module => module.mountTeaser(animatedTeaser)).catch(error => {
+  import('./assets/teaser/viewer.js?v=20260909-1').then(module => module.mountTeaser(animatedTeaser)).catch(error => {
    document.getElementById('teaser-status').textContent = 'Original figure · 3D unavailable';
    console.error('Unable to initialize the elephant teaser:', error);
   });

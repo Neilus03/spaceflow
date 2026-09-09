@@ -14,16 +14,16 @@
   <title>SpaceFlow · Locally Controllable 3D Generation</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/fonts/Caveat-Bold.ttf" as="font" type="font/ttf" crossorigin>
-  <script src="assets/theme.js?v=20260908-1"></script>
-  <link rel="stylesheet" href="style.css?v=20260908-1">
-  <script src="assets/featured-data.js?v=20260908-1"></script>
-  <script src="site.js?v=20260908-1" defer></script>
+  <script src="assets/theme.js?v=20260909-1"></script>
+  <link rel="stylesheet" href="style.css?v=20260909-1">
+  <script src="assets/featured-data.js?v=20260909-1"></script>
+  <script src="site.js?v=20260909-1" defer></script>
 </head>
 <body>
 <a class="skip-link" href="#content">Skip to content</a>
 <header class="nav">
   <a class="brand wordmark" href="#" aria-label="SpaceFlow home">SpaceFlow</a>
-  <nav aria-label="Main navigation"><a href="#overview">Overview</a><a href="#explore">Examples</a><a href="#results">Results</a><a href="assets/SpaceFlow-paper.pdf?v=20260908-1" target="_blank" rel="noopener">Paper <span aria-hidden="true">↗</span></a></nav>
+  <nav aria-label="Main navigation"><a href="#overview">Overview</a><a href="#explore">Examples</a><a href="#results">Results</a><a href="assets/SpaceFlow-paper.pdf?v=20260909-1" target="_blank" rel="noopener">Paper <span aria-hidden="true">↗</span></a></nav>
   <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark mode" aria-pressed="false"><svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 13A9 9 0 0 1 11 3.2 9 9 0 1 0 20.8 13Z"/></svg><svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg><span class="theme-label">Dark mode</span></button>
 </header>
 <main id="content">
@@ -36,7 +36,7 @@
       <div><a href="https://people.inf.ethz.ch/pomarc/" target="_blank" rel="noopener">Marc Pollefeys<sup>1</sup></a><a href="https://github.com/atcelen" target="_blank" rel="noopener">Ata Çelen<sup>1</sup></a><a href="https://sayands.github.io/" target="_blank" rel="noopener">Sayan Deb Sarkar<sup>2</sup></a><a href="https://elisabettafedele.github.io/" target="_blank" rel="noopener">Elisabetta Fedele<sup>1</sup></a></div>
     </div>
     <p class="affiliations"><span><sup>1</sup> ETH Zürich</span><span><sup>2</sup> Stanford University</span><span>* Equal contribution</span></p>
-    <div class="actions"><a class="button primary" href="assets/SpaceFlow-paper.pdf?v=20260908-1" target="_blank" rel="noopener"><span aria-hidden="true">↗</span> Paper & supplement</a><a class="button" href="#video"><span aria-hidden="true">▷</span> Watch the teaser</a><a class="button" href="#explore">Interactive examples <span aria-hidden="true">↗</span></a></div>
+    <div class="actions"><a class="button primary" href="assets/SpaceFlow-paper.pdf?v=20260909-1" target="_blank" rel="noopener"><span aria-hidden="true">↗</span> Paper & supplement</a><a class="button" href="#video"><span aria-hidden="true">▷</span> Watch the teaser</a><a class="button" href="#explore">Interactive examples <span aria-hidden="true">↗</span></a></div>
     <div class="institution-logos" aria-label="Research groups and institutions">
       <a href="https://cvg.ethz.ch/" target="_blank" rel="noopener"><img src="assets/logos/cvg.svg" alt="Computer Vision and Geometry Group (CVG)" width="309" height="148"></a>
       <a href="https://gradientspaces.stanford.edu/" target="_blank" rel="noopener"><img src="assets/logos/gradient-spaces.png" alt="Gradient Spaces Lab" width="320" height="120"></a>
@@ -46,7 +46,7 @@
   </section>
 
   <section class="section teaser-video-section" id="video" aria-label="SpaceFlow teaser video">
-    <video id="demo-video" controls muted loop playsinline preload="metadata" poster="assets/figures/teaser.webp" data-autoplay><source src="assets/SpaceFlow-teaser.mp4" type="video/mp4"><p><a href="assets/SpaceFlow-teaser.mp4">Download the teaser video.</a></p></video>
+    <video id="demo-video" controls muted loop playsinline preload="metadata" poster="assets/figures/teaser.webp" data-autoplay><source src="assets/SpaceFlow-teaser.mp4?v=20260909-1" type="video/mp4"><p><a href="assets/SpaceFlow-teaser.mp4?v=20260909-1">Download the teaser video.</a></p></video>
     <p class="tldr"><strong>TL;DR</strong> SpaceFlow generates 3D assets from geometric primitives, with local shape control and part-specific text or image appearance cues, without retraining.</p>
   </section>
 
@@ -64,9 +64,9 @@
 
   <section class="section examples-section" id="explore" aria-labelledby="examples-title">
     <div class="section-title-row"><div><p class="eyebrow">INTERACTIVE EXAMPLES</p><h2 id="examples-title">Explore the generated assets</h2></div><div class="carousel-nav"><button class="button" id="carousel-prev" aria-label="Previous example">←</button><span id="carousel-position" role="status">1 / 36</span><button class="button" id="carousel-next" aria-label="Next example">→</button></div></div>
-    <div class="examples-toolbar"><label for="example-search" class="sr-only">Search examples</label><input id="example-search" type="search" placeholder="Find an object, material, or part…"><button class="text-button" id="hero-rotate" aria-pressed="true">Pause rotation</button><button class="text-button" id="reset-view">Reset cameras ↻</button></div>
+    <div class="examples-toolbar"><button class="text-button" id="hero-rotate" aria-pressed="true">Pause rotation</button><button class="text-button" id="reset-view">Reset cameras ↻</button></div>
     <div class="featured-key carousel-key" aria-label="Input geometry color legend"><span><i class="swatch high"></i><strong>High control</strong> Preserve the input shape</span><span><i class="swatch low"></i><strong>Low control</strong> Allow generative completion</span></div>
-    <iframe id="hero-viewer" class="carousel-viewer" src="gallery.html?v=20260908-1&amp;carousel=1" title="All SpaceFlow interactive input and result comparisons, in a horizontally scrolling carousel" loading="lazy"></iframe>
+    <iframe id="hero-viewer" class="carousel-viewer" src="gallery.html?v=20260909-1&amp;carousel=1" title="All SpaceFlow interactive input and result comparisons, in a horizontally scrolling carousel" loading="lazy"></iframe>
     <p class="carousel-hint">Scroll sideways or use the arrows to browse. Drag a model to rotate its pair; scroll over it to zoom. Inspect an example to download its GLBs.</p>
   </section>
 
@@ -74,7 +74,7 @@
 
   <section class="section results-compact" id="results" aria-labelledby="results-title"><h2 id="results-title">Experimental results</h2><div class="chart-panel"><div class="chart-top"><h3>SpaceFlow win rate</h3><label for="metric-select">Evaluation criterion<select id="metric-select"><option value="overall">Overall preference</option><option value="pgf">Prompt & geometric fidelity</option><option value="realism">Realism</option></select></label></div><div class="bar-chart" role="img" aria-label="Overall preference: SpaceFlow wins 75.9 percent against low uniform guidance and 68.7 percent against high uniform guidance."><div class="chart-row"><div class="bar-label"><span>vs. SpaceControl · τ = 3</span><strong id="value-low">75.9%</strong></div><div class="track"><span id="bar-low" style="width:75.9%"></span><i aria-hidden="true"></i></div><p class="confidence" id="ci-low">95% CI [65.7, 83.8]</p></div><div class="chart-row"><div class="bar-label"><span>vs. SpaceControl · τ = 10</span><strong id="value-high">68.7%</strong></div><div class="track"><span id="bar-high" style="width:68.7%"></span><i aria-hidden="true"></i></div><p class="confidence" id="ci-high">95% CI [58.1, 77.6]</p></div><div class="chart-axis"><span>0%</span><span>50% · equal preference</span><span>100%</span></div></div><p class="chart-note" id="metric-note" aria-live="polite">Overall preference balances fidelity to the input and realism. These are VLM-judge results over 83 assets, aggregated by majority vote across three passes; intervals are 95% Wilson confidence intervals.</p></div></section>
 
-  <section class="section resources" id="paper" aria-labelledby="paper-title"><div class="resource-heading"><p class="eyebrow">05 / RESOURCES</p><h2 id="paper-title">Paper and resources</h2><p>The paper, the workflow, and the generated assets.</p></div><div class="resource-links"><a href="assets/SpaceFlow-paper.pdf?v=20260908-1" target="_blank" rel="noopener"><span class="resource-icon">↗</span><span><strong>Paper & supplementary material</strong><small>Method, experiments, and supplementary material</small></span><span aria-hidden="true">↗</span></a><a href="#explore"><span class="resource-icon">◈</span><span><strong>Interactive 3D gallery</strong><small>Paired inputs and results · rotate, compare, download GLBs</small></span><span aria-hidden="true">↗</span></a><a href="assets/SpaceFlow-demo.mp4"><span class="resource-icon">▷</span><span><strong>Video demonstration</strong><small>Geometric and appearance-control workflow</small></span><span aria-hidden="true">↗</span></a></div></section>
+  <section class="section resources" id="paper" aria-labelledby="paper-title"><div class="resource-heading"><p class="eyebrow">05 / RESOURCES</p><h2 id="paper-title">Paper and resources</h2><p>The paper, the workflow, and the generated assets.</p></div><div class="resource-links"><a href="assets/SpaceFlow-paper.pdf?v=20260909-1" target="_blank" rel="noopener"><span class="resource-icon">↗</span><span><strong>Paper & supplementary material</strong><small>Method, experiments, and supplementary material</small></span><span aria-hidden="true">↗</span></a><a href="#explore"><span class="resource-icon">◈</span><span><strong>Interactive 3D gallery</strong><small>Paired inputs and results · rotate, compare, download GLBs</small></span><span aria-hidden="true">↗</span></a><a href="assets/SpaceFlow-demo.mp4"><span class="resource-icon">▷</span><span><strong>Video demonstration</strong><small>Geometric and appearance-control workflow</small></span><span aria-hidden="true">↗</span></a></div></section>
 
   <section class="section citation" aria-labelledby="citation-title"><div class="citation-heading"><h2 id="citation-title">Citation</h2><button class="button" id="copy-citation">Copy BibTeX <span aria-hidden="true">⧉</span></button></div><pre><code id="bibtex">@misc{delafuente2026spaceflow,
   title  = {SpaceFlow: Locally Controllable 3D Generation},
